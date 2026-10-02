@@ -1,0 +1,124 @@
+Obol Self-Host Distribution License — version 1.0
+
+Copyright (c) 2026 tameioncs-acc. All rights reserved, except for the permissions
+expressly granted below or by a separate applicable license.
+
+### 1. Scope
+
+This license covers the Obol-owned application files, container images,
+installation and deployment files, and documentation distributed with this
+license (the "Software"). "Licensor" means the copyright holder named above.
+"You" means the person or entity using the Software. Third-party components
+and previously licensed copies are addressed in section 7.
+
+### 2. Free self-host permission
+
+Subject to these terms, Licensor grants you a worldwide, non-exclusive,
+royalty-free license to download, copy, install, and run the Software on
+infrastructure that you own, rent, or control. You may use it for personal,
+evaluation, development, and commercial production purposes, including as a
+backend component of your own applications and services offered to customers.
+Charging for those applications and services is permitted, subject to
+section 4's restriction on offering Obol itself as a service.
+
+You may keep private image mirrors, offline bundles, backups, and disaster
+recovery copies for those purposes. Employees, contractors, hosting providers,
+and auditors may receive or access copies solely to operate, support, secure,
+or audit your permitted installations on your behalf. You remain responsible
+for their compliance with these terms.
+
+This permission does not expire for a version validly obtained under this
+license while you comply with its terms. It does not require purchase of
+support or an Enterprise entitlement for the core self-host features.
+
+### 3. Configuration, integrations, and customer data
+
+You may modify deployment files, configuration, policies, connector
+definitions, and templates supplied for customization, and create integrations
+with your own agents and applications. These permissions do not grant a
+general right to modify or redistribute the Obol application implementation.
+
+You retain your rights in your data, prompts, credentials, configurations,
+policies, integrations, and generated outputs. This license grants Licensor no
+right to collect or use those materials. You retain responsibility for your
+vendor accounts, vendor charges, infrastructure, and applicable third-party
+terms.
+
+### 4. Distribution and application restrictions
+
+Except as expressly permitted in sections 2, 3, and 7 or by a separate written
+agreement with Licensor, you may not:
+
+- Publish, redistribute, sell, sublicense, rent, or transfer copies of the
+  Software to third parties, including through a public image mirror or a
+  rebranded distribution.
+- Offer the Software as a hosted or managed Obol service for third parties,
+  whether directly or under another name. This restriction does not prohibit
+  using Obol internally as a backend component of an application or service
+  whose primary offering is something other than Obol's control-plane
+  functionality.
+- Modify the Obol application implementation or create derivative
+  implementations from it, except where applicable law or a separate license
+  permits that activity.
+- Circumvent Enterprise entitlement checks or enable paid capabilities without
+  the applicable entitlement.
+- Remove or obscure copyright, license, or attribution notices.
+
+Distribution does not grant access to Licensor's private source repository or
+Git history. Runtime files may be readable or technically inspectable; their
+presence does not grant additional rights under this license. Nothing here
+restricts inspection, interoperability, security research, or other activity
+to the extent a restriction would be prohibited by applicable law or a
+third-party license.
+
+### 5. Enterprise capabilities and support
+
+Contracted support, SCIM, audit streaming or export, and BYOA capabilities
+require the applicable separate commercial agreement and entitlement. A free
+self-host installation does not include support, maintenance, an SLA, an
+uptime commitment, or a promise of future versions. A separate written
+agreement controls if it expressly grants different rights.
+
+### 6. Termination
+
+Your permissions under this license terminate if you materially breach its
+terms and do not cure that breach within 30 days after written notice from
+Licensor. On termination, stop using and delete the Software copies covered
+by the terminated permission. You may retain copies that applicable law
+requires, without running them, and retain or export your own data. Sections
+7 through 9 and obligations concerning notices continue as applicable.
+
+### 7. Third-party components and earlier licenses
+
+Third-party components remain governed by their own licenses, including the
+licenses identified in `THIRD_PARTY_NOTICES.md` and the applicable image or
+package notices. Their terms take precedence over this license for those
+components. Nothing here removes rights granted by an applicable open-source
+license or a Licensor obligation to provide notices or corresponding source
+for a third-party component.
+
+This license does not revoke or replace rights already granted for copies
+previously received under another license, including MIT. It applies only to
+copies distributed under this license and to the extent Licensor has the
+authority to grant and condition those rights.
+
+### 8. Warranty and liability
+
+To the maximum extent permitted by applicable law, the Software is provided
+as is and as available, without warranties of merchantability, fitness for a
+particular purpose, non-infringement, uninterrupted operation, or freedom from
+errors. You are responsible for operating, securing, backing up, and testing
+your installation.
+
+To the maximum extent permitted by applicable law, Licensor is not liable for
+indirect, incidental, special, consequential, or punitive damages, or loss of
+profits, revenue, data, or business arising from the Software. This section
+does not exclude liability that applicable law does not permit to be
+excluded, or obligations expressly accepted in a separate written agreement.
+
+### 9. Reserved rights
+
+No trademark rights or rights beyond those expressly stated are granted. If a
+provision cannot be enforced, the remaining provisions continue to apply to
+the extent permitted by law. Updates to these terms do not retroactively
+replace the terms of a copy you already received.

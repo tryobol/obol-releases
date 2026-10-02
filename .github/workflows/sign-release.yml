@@ -1,0 +1,54 @@
+# Installed at .github/workflows/sign-release.yml in tryobol/obol-releases.
+# This repository contains distribution tooling only, never application source.
+name: Sign Obol release checksums
+on:
+  repository_dispatch:
+    types: [obol-sign-release]
+permissions: {}
+concurrency:
+  group: sign-${{ github.event.client_payload.release_id }}
+  cancel-in-progress: false
+jobs:
+  sign:
+    if: github.repository == 'tryobol/obol-releases' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ github.event.client_payload.version }}
+      RELEASE_ID: ${{ github.event.client_payload.release_id }}
+      CHECKSUM: ${{ github.event.client_payload.checksum }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with: {persist-credentials: false}
+      - name: Validate the draft identity and asset names
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_ID" =~ ^[1-9][0-9]*$ ]] || exit 1
+          gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" > metadata.json
+          python3 validate_release.py metadata "$VERSION" "$RELEASE_ID" metadata.json
+      - name: Download and validate every release byte
+        run: |
+          set -euo pipefail
+          gh release download "selfhost-v$VERSION" --repo "$GITHUB_REPOSITORY" --dir assets
+          python3 validate_release.py files "$VERSION" "$CHECKSUM" assets
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        with: {cosign-release: v3.1.3}
+      - name: Sign and verify the release checksums
+        run: |
+          set -euo pipefail
+          cosign sign-blob --yes --bundle assets/RELEASE_SHA256SUMS.sigstore.json assets/RELEASE_SHA256SUMS
+          cosign verify-blob --bundle assets/RELEASE_SHA256SUMS.sigstore.json \
+            --certificate-identity "https://github.com/tryobol/obol-releases/.github/workflows/sign-release.yml@refs/heads/main" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com assets/RELEASE_SHA256SUMS
+      - name: Attach the signature to the unchanged draft
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" > metadata.json
+          python3 validate_release.py metadata "$VERSION" "$RELEASE_ID" metadata.json
+          # No overwrite and no publication. The originating release job verifies
+          # this signature against its own checksums before publishing the draft.
+          gh release upload "selfhost-v$VERSION" --repo "$GITHUB_REPOSITORY" assets/RELEASE_SHA256SUMS.sigstore.json
